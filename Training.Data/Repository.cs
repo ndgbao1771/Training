@@ -23,6 +23,11 @@ namespace Training.Repository
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);
+
+        }
+        public void Delete(int id)
+        {
+            Delete(FindById(id));
         }
 
         public T FindById(int id)
