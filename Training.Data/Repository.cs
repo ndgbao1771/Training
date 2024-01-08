@@ -18,23 +18,27 @@ namespace Training.Repository
         public void Add(T entity)
         {
             _dbSet.Add(entity);
-            _context.SaveChanges();
         }
 
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);
-            _context.SaveChanges();
         }
 
         public T FindById(int id)
         {
             return _dbSet.Find(id);
         }
-
+        public List<T> FindAll()
+        {
+            return _dbSet.ToList();
+        }
         public void Update(T entity)
         {
             _dbSet.Update(entity);
+        }
+        public void Commit()
+        {
             _context.SaveChanges();
         }
     }
