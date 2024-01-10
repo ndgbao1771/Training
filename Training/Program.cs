@@ -31,6 +31,7 @@ builder.Services.AddTransient<ITodoRepository, TodoRepository>();
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
 builder.Services.AddTransient<IBookCategoryRepository, BookCategoryRepository>();
+builder.Services.AddTransient<IBookDetailRepository, BookDetailRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

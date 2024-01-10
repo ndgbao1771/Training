@@ -6,6 +6,10 @@ namespace Training.Service.Interfaces
     {
         List<BookViewModel> GetAll();
 
+        List<BookViewModel> GetByAuthor(string keyword);
+
+        List<BookViewModel> GetByCate(string keyword);
+
         BookViewModel GetById(int id);
 
         BookViewUpdateModel Add(BookViewUpdateModel bookViewUpdateModel);
