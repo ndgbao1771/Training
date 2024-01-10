@@ -4,6 +4,10 @@ namespace Training.Model.Entities
 {
     public class Book : DomainEntity<int>, IDateTracking
     {
+        public Book()
+        {
+        }
+
         public Book(string name, DateTime createdAt, string createdBy, DateTime updatedAt, string updatedBy)
         {
             Name = name;

@@ -32,12 +32,29 @@ namespace Training.Service.Implement.BookWarehouse
             }
             else
             {
-
-            }
                 var datas = _mapper.Map<BookViewUpdateModel, Book>(bookViewUpdateModel);
-
-            _bookRepository.Add(datas);
-            _bookRepository.Commit();
+                Book b = new Book()
+                {
+                    Name = bookViewUpdateModel.Name,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = bookViewUpdateModel.CreatedBy,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = bookViewUpdateModel.UpdatedBy,
+                    AuthorId = bookViewUpdateModel.AuthorId,
+                    BookCategoryId = bookViewUpdateModel.BookCategoryId,
+                    bookDetails = new List<BookDetail>()
+                    {
+                        new BookDetail()
+                        {
+                            Seri = bookViewUpdateModel.Seri,
+                            BookId = bookViewUpdateModel.Id
+                        }
+                    }
+                };
+                _bookRepository.Add(b);
+                _bookRepository.Commit();
+            }
+            
             return bookViewUpdateModel;
         }
 
@@ -71,6 +88,67 @@ namespace Training.Service.Implement.BookWarehouse
                 bookViewModels.Add(viewModel);
             }
             return bookViewModels;
+        }
+
+        public List<BookViewModel> GetByAuthor(string keyword)
+        {
+            List<Book> datas = _bookRepository.GetByAuthor(keyword);
+            List<BookViewModel> bookViewModels = new List<BookViewModel>();
+            if(datas != null)
+            {
+                foreach (var data in datas)
+                {
+                    var bookDetail = _context.BookDetails.Where(x => x.BookId == data.Id).FirstOrDefault();
+                    Author author = _context.Authors.Where(x => x.Id == data.AuthorId).FirstOrDefault();
+                    BookCategory category = _context.BookCategories.Where(x => x.Id == data.BookCategoryId).FirstOrDefault();
+                    BookViewModel bookViewModel = new BookViewModel
+                    {
+                        Id = data.Id,
+                        Name = data.Name,
+                        Seri = bookDetail.Seri,
+                        CreatedAt = data.CreatedAt,
+                        UpdatedAt = data.UpdatedAt,
+                        CreatedBy = data.CreatedBy,
+                        UpdatedBy = data.UpdatedBy,
+                        Author = author.Name,
+                        BookCategory = category.Name
+
+                    };
+                    bookViewModels.Add(bookViewModel);
+                }
+            }
+            
+            return bookViewModels.ToList();
+        }
+        public List<BookViewModel> GetByCate(string keyword)
+        {
+            List<Book> datas = _bookRepository.GetByCate(keyword);
+            List<BookViewModel> bookViewModels = new List<BookViewModel>();
+            if (datas != null)
+            {
+                foreach (var data in datas)
+                {
+                    var bookDetail = _context.BookDetails.Where(x => x.BookId == data.Id).FirstOrDefault();
+                    Author author = _context.Authors.Where(x => x.Id == data.AuthorId).FirstOrDefault();
+                    BookCategory category = _context.BookCategories.Where(x => x.Id == data.BookCategoryId).FirstOrDefault();
+                    BookViewModel bookViewModel = new BookViewModel
+                    {
+                        Id = data.Id,
+                        Name = data.Name,
+                        Seri = bookDetail.Seri,
+                        CreatedAt = data.CreatedAt,
+                        UpdatedAt = data.UpdatedAt,
+                        CreatedBy = data.CreatedBy,
+                        UpdatedBy = data.UpdatedBy,
+                        Author = author.Name,
+                        BookCategory = category.Name
+
+                    };
+                    bookViewModels.Add(bookViewModel);
+                }
+            }
+
+            return bookViewModels.ToList();
         }
 
         public BookViewModel GetById(int id)
