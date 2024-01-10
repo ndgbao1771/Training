@@ -15,7 +15,6 @@ namespace Training.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly ITodoService _todoService;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {

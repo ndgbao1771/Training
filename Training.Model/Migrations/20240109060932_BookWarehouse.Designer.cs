@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Training.Model;
 
@@ -11,9 +12,11 @@ using Training.Model;
 namespace Training.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240109060932_BookWarehouse")]
+    partial class BookWarehouse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,6 +225,9 @@ namespace Training.Model.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<int>("LibrarianId")
                         .HasColumnType("int");
 
@@ -229,6 +235,8 @@ namespace Training.Model.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("LibrarianId");
 
@@ -245,9 +253,6 @@ namespace Training.Model.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateGiveCurrent")
                         .HasColumnType("datetime2");
 
@@ -257,9 +262,10 @@ namespace Training.Model.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.HasIndex("BookId");
+                    b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
@@ -321,6 +327,12 @@ namespace Training.Model.Migrations
 
             modelBuilder.Entity("Training.Model.Entities.Order", b =>
                 {
+                    b.HasOne("Training.Model.Entities.Book", "book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Training.Model.Entities.Librarian", "librarian")
                         .WithMany("orders")
                         .HasForeignKey("LibrarianId")
@@ -333,6 +345,8 @@ namespace Training.Model.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("book");
+
                     b.Navigation("librarian");
 
                     b.Navigation("member");
@@ -340,19 +354,11 @@ namespace Training.Model.Migrations
 
             modelBuilder.Entity("Training.Model.Entities.OrderDetail", b =>
                 {
-                    b.HasOne("Training.Model.Entities.Book", "book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Training.Model.Entities.Order", "order")
                         .WithMany("orderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("book");
 
                     b.Navigation("order");
                 });
