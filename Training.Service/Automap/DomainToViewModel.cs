@@ -20,6 +20,15 @@ namespace Training.Service.Automap
             CreateMap<BookCategory, BookCategoryViewModel>();
 
             CreateMap<BookDetail, BookDetailViewModel>();
+
+            CreateMap<Member, MemberViewModel>();
+
+            CreateMap<Order, OrderViewModel>().ForMember(dest => dest.MemberName, otp => otp.MapFrom(x => x.member.Name))
+                                              .ForMember(dest => dest.LibrarianName, otp => otp.MapFrom(x => x.librarian.Name));
+
+            CreateMap<OrderDetail, OrderDetailViewModel>().ForMember(dest => dest.BookName, otp => otp.MapFrom(x => x.book.Name));
+
+            CreateMap<Librarian, LibrarianViewModel>();
         }
     }
 }
