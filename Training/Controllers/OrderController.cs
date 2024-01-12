@@ -22,6 +22,13 @@ namespace Training.Controllers
             return new OkObjectResult(datas);
         }
 
+        [HttpGet]
+        public IActionResult GetListBookProgressOfMember(int id)
+        {
+            var datas = _orderService.GetListBookProgressOfMember(id);
+            return new OkObjectResult(datas);
+        }
+
         [HttpPost]
         public IActionResult Add(OrderViewModel orderViewModel)
         {

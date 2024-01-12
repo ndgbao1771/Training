@@ -13,9 +13,10 @@ namespace Training.Repository.BookWarehouseRepository
             _context = context;
         }
 
-        public List<Member> GetMemberByName(string name)
+        public IQueryable<Member> GetMemberByName(string name)
         {
-            return _context.Members.Where(x => x.Name.Contains(name)).ToList();
+            var datas = _context.Members.Where(x => x.Name.Contains(name));
+            return datas;
         }
     }
 }

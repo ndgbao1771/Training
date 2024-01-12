@@ -38,7 +38,7 @@ namespace Training.Service.Implement.BookWarehouse
 
         public List<BookCategoryViewModel> GetAll()
         {
-            List<BookCategory> datas = _bookCategoryRepository.FindAll();
+            List<BookCategory> datas = _bookCategoryRepository.FindAll().ToList();
             List<BookCategoryViewModel> dataView = _mapper.Map<List<BookCategory>, List<BookCategoryViewModel>>(datas);
             return dataView;
         }

@@ -5,7 +5,8 @@ namespace Training.Repository.Interfaces.BookWarehouse
     public interface IOrderRepository : IRepository<Order>
     {
         IQueryable<Order> GetAllWithJoin();
-        List<Order> GetOrderByMemberName(string keyword);
-        List<Order> GetOrderByLibrariansName(string keyword);
+        IQueryable<Order> GetOrderByMemberName(string keyword);
+        IQueryable<Order> GetOrderByLibrariansName(string keyword);
+        IQueryable<Order> GetListBookProgressOfMember(int id);
     }
 }

@@ -4,6 +4,6 @@ namespace Training.Repository.Interfaces.BookWarehouse
 {
     public interface ILibrarianRepository : IRepository<Librarian>
     {
-        List<Librarian> GetAllByName(string keyword);
+        IQueryable<Librarian> GetAllByName(string keyword);
     }
 }

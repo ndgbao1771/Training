@@ -6,6 +6,8 @@ namespace Training.Service.Interfaces
     {
         List<OrderViewModel> GetAll();
 
+        List<OrderViewModel> GetListBookProgressOfMember(int id);
+
         OrderViewModel Add(OrderViewModel orderViewModel);
 
         void Update(OrderViewModel orderViewModel);

@@ -27,24 +27,10 @@ namespace Training.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string? keyword)
         {
-            var model = _bookService.GetAll();
+            var model = _bookService.GetAll(keyword);
             return new OkObjectResult(model);
-        }
-
-        [HttpGet]
-        public IActionResult GetByAuthor(string keyword)
-        {
-            var datas = _bookService.GetByAuthor(keyword);
-            return new ObjectResult(datas);
-        }
-
-        [HttpGet]
-        public IActionResult GetByCate(string keyword)
-        {
-            var datas = _bookService.GetByCate(keyword);
-            return new ObjectResult(datas);
         }
 
         [HttpDelete]

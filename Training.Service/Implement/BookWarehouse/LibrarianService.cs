@@ -40,14 +40,14 @@ namespace Training.Repository.BookWarehouseRepository
 
         public List<LibrarianViewModel> GetAll()
         {
-            List<Librarian> datas = _librarianRepository.FindAll();
+            List<Librarian> datas = _librarianRepository.FindAll().ToList();
             List<LibrarianViewModel> dataViewModel = _mapper.Map<List<Librarian>, List<LibrarianViewModel>>(datas);
             return dataViewModel;
         }
 
         public List<LibrarianViewModel> GetAllByName(string keyword)
         {
-            List<Librarian> datas = _librarianRepository.GetAllByName(keyword);
+            List<Librarian> datas = _librarianRepository.GetAllByName(keyword).ToList();
             List<LibrarianViewModel> dataViewModel = _mapper.Map<List<Librarian>, List<LibrarianViewModel>>(datas);
             return dataViewModel;
         }

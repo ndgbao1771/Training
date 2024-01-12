@@ -4,11 +4,7 @@ namespace Training.Service.Interfaces
 {
     public interface IBookService
     {
-        List<BookViewModel> GetAll();
-
-        List<BookViewModel> GetByAuthor(string keyword);
-
-        List<BookViewModel> GetByCate(string keyword);
+        List<BookViewModel> GetAll(string? keyword);
 
         BookViewModel GetById(int id);
 

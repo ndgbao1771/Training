@@ -32,7 +32,7 @@ namespace Training.Service.Implement.BookWarehouse
 
         public List<AuthorViewModel> GetAll()
         {
-            List<Author> datas = _authorRepository.FindAll();
+            List<Author> datas = _authorRepository.FindAll().ToList();
             List<AuthorViewModel> datasView = _mapper.Map<List<Author>, List<AuthorViewModel>>(datas);
             return datasView;
         }

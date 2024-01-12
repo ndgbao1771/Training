@@ -21,7 +21,7 @@ namespace Training.Service.Implement.BookWarehouse
 
         public List<OrderDetailViewModel> GetAll()
         {
-            List<OrderDetail> datas = _orderDetailRepository.FindAll();
+            List<OrderDetail> datas = _orderDetailRepository.FindAll().ToList();
             List<OrderDetailViewModel> result = _mapper.Map<List<OrderDetail>, List<OrderDetailViewModel>>(datas);
             return result;
         }

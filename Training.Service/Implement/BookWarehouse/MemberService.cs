@@ -55,7 +55,7 @@ namespace Training.Service.Implement.BookWarehouse
 
         public List<MemberViewModel> GetMembers()
         {
-            List<Member> datas = _memberRepository.FindAll();
+            List<Member> datas = _memberRepository.FindAll().ToList();
             List<MemberViewModel> dataView = _mapper.Map<List<Member>, List<MemberViewModel>>(datas);
             return dataView;
         }

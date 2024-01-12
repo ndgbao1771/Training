@@ -4,6 +4,6 @@ namespace Training.Repository.Interfaces.BookWarehouse
 {
     public interface IMemberRepository : IRepository<Member>
     {
-        List<Member> GetMemberByName(string name);
+        IQueryable<Member> GetMemberByName(string name);
     }
 }

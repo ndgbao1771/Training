@@ -41,6 +41,13 @@ namespace Training.Service.Implement.BookWarehouse
             return dataView;
         }
 
+        public List<OrderViewModel> GetListBookProgressOfMember(int id)
+        {
+            List<Order> datas = _orderRepository.GetListBookProgressOfMember(id).ToList();
+            List<OrderViewModel> dataView = _mapper.Map<List<Order>, List<OrderViewModel>>(datas);
+            return dataView;
+        }
+
         public void Update(OrderViewModel orderViewModel)
         {
             if(orderViewModel.Id != 0)

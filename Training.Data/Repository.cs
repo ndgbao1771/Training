@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using Training.Model;
 using Training.Repository.Interfaces;
 
@@ -34,9 +35,10 @@ namespace Training.Repository
         {
             return _dbSet.Find(id);
         }
-        public List<T> FindAll()
+        public IQueryable<T> FindAll()
         {
-            return _dbSet.ToList();
+            IQueryable<T> item = _dbSet;
+            return item;
         }
         public void Update(T entity)
         {

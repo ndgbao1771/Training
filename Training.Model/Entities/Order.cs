@@ -1,4 +1,5 @@
-﻿using Training.Model.Shared;
+﻿using Training.Model.Enum;
+using Training.Model.Shared;
 
 namespace Training.Model.Entities
 {
@@ -9,7 +10,7 @@ namespace Training.Model.Entities
             MemberId = memberId;
             LibrarianId = librarianId;
         }
-
+        public Statusable Status { get; set; }
         public int MemberId { get; set; }
         public Member member { get; set; }
         public int LibrarianId { get; set; }

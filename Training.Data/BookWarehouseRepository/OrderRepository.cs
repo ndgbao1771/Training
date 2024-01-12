@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Training.Model;
 using Training.Model.Entities;
+using Training.Model.Enum;
 using Training.Repository.Interfaces.BookWarehouse;
 
 namespace Training.Repository.BookWarehouseRepository
@@ -14,12 +15,12 @@ namespace Training.Repository.BookWarehouseRepository
             _context = context;
         }
 
-        public List<Order> GetOrderByLibrariansName(string keyword)
+        public IQueryable<Order> GetOrderByLibrariansName(string keyword)
         {
             throw new NotImplementedException();
         }
 
-        public List<Order> GetOrderByMemberName(string keyword)
+        public IQueryable<Order> GetOrderByMemberName(string keyword)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +33,13 @@ namespace Training.Repository.BookWarehouseRepository
                                 .ThenInclude(y => y.book)
                                 .Include(z => z.member);
 
-            return (IQueryable<Order>)datas;
+            return datas;
+        }
+
+        public IQueryable<Order> GetListBookProgressOfMember(int id)
+        {
+            var datas = _context.Orders.Where(x=> x.MemberId == id && x.Status == Statusable.Progess).Include(x => x.orderDetails).ThenInclude(x => x.book);
+            return datas;
         }
     }
 }

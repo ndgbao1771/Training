@@ -2,7 +2,7 @@
 {
     public interface IRepository<T> where T : class
     {
-        List<T> FindAll();
+        IQueryable<T> FindAll();
 
         T FindById(int Id);
 

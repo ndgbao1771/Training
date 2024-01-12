@@ -13,9 +13,9 @@ namespace Training.Repository.BookWarehouseRepository
             _context = context;
         }
 
-        public List<Librarian> GetAllByName(string keyword)
+        public IQueryable<Librarian> GetAllByName(string keyword)
         {
-            return _context.Librarians.Where(x => x.Name.Contains(keyword)).ToList();
+            return _context.Librarians.Where(x => x.Name.Contains(keyword));
         }
     }
 }
